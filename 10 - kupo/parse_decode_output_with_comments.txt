@@ -1,0 +1,22 @@
+decode: 				  ; (arg1, arg2)
+ decode+4: zero			  ; (arg1, arg2, 0) 	push 0
+ decode+6: tor			  ; (arg1, arg2)    	pop r5, push sp (sp holds prev_val, set prev_val=0)
+ decode+8: dup			  ; (arg1, arg2, arg2)
+ decode+10: if decode+42  ; (arg1, arg2)		if (arg2 != 0)  (arg2 is loop counter)
+ decode+14: swap		  ; (arg2, arg1)
+ decode+16: dup			  ; (arg2, arg1, arg1)
+ decode+18: cat			  ; (arg2, arg1, *arg1)  read one byte from arg1 (arg1 is a pointer)
+ decode+20: rto			  ; (arg2, arg1, *arg1, prev_val)   pop sp, push r5
+ decode+22: plus		  ; (arg2, arg1, *arg1+prev_val)
+ decode+24: twodup		  ; (arg2, arg1, *arg1+prev_val, arg1, *arg1+prev_val)
+ decode+26: swap		  ; (arg2, arg1, *arg1+prev_val, *arg1+prev_val, arg1)
+ decode+28: cbang		  ; (arg2, arg1, *arg1+prev_val) *arg1=*arg1+prev_val
+ decode+30: tor			  ; (arg2, arg1)         pop r5, push sp (set prev_val=*arg1+prev_val)
+ decode+32: oneplus       ; (arg2, arg1+1)
+ decode+34: swap		  ; (arg1+1, arg2)
+ decode+36: oneminus      ; (arg1+1, arg2-1)
+ decode+38: goto decode+8 ; (arg1+1, arg2-1)
+ decode+42: rdrop		  ; (arg1+arg2, 0)   pop sp
+ decode+44: twodrop		  ; ()
+ decode+46: exit		  ; ()
+ 

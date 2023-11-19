@@ -1,0 +1,8 @@
+se,
+  "preventSleep": false,
+  "recentWalletFiles": [
+    "C:\\Users\\John\\AppData\\Roaming\\Sparrow\\wallets\\mywallet.mv.db"
+  ],
+  "keyDerivationPeriod": 1831,
+  "dustAttackThreshold": 1000,
+  "hwi": "C:
